@@ -121,10 +121,10 @@ function display_podcast_analytics() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'bc_podcast_analytics';
 
-	$results = $wpdb->get_results( "SELECT * FROM $table_name ORDER BY timestamp DESC" );
+	$results = $wpdb->get_results( "SELECT * FROM $table_name ORDER BY timestamp DESC LIMIT 500" );
 
 	echo '<h1>Podcast Analytics</h1>';
-	echo '<table border="1">
+	echo '<table class="widefat">
             <tr>
                 <th>Timestamp</th>
                 <th>IP Address</th>
