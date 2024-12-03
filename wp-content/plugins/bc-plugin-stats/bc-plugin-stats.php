@@ -81,7 +81,7 @@ function log_podcast_download( WP_REST_Request $request ) {
 	$file_path  = $request->get_param( 'file_path' );
 
 	// Insert data into the database.
-	$table_name = $wpdb->prefix . 'podcast_analytics';
+	$table_name = $wpdb->prefix . 'bc_podcast_analytics';
 	$wpdb->insert(
 		$table_name,
 		array(
