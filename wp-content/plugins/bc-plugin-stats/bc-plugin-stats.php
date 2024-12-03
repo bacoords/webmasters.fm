@@ -50,12 +50,12 @@ register_activation_hook( __FILE__, __NAMESPACE__ . '\create_podcast_analytics_t
  */
 function register_our_rest_routes() {
 	register_rest_route(
-		'podcast/v1',
+		'wm/v1',
 		'/log',
 		array(
 			'methods'             => 'POST',
 			'callback'            => __NAMESPACE__ . '\log_podcast_download',
-			'permission_callback' => '__return_true', // Optionally restrict access
+			'permission_callback' => '__return_true', // Optionally restrict access.
 		)
 	);
 }
