@@ -100,7 +100,7 @@ function log_podcast_download( WP_REST_Request $request ) {
  * @return void
  */
 function add_our_admin_menu_page() {
-	add_menu_page(
+	add_management_page(
 		'Podcast Analytics',
 		'Podcast Analytics',
 		'manage_options',
