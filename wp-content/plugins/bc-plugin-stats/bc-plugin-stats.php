@@ -55,7 +55,9 @@ function register_our_rest_routes() {
 		array(
 			'methods'             => 'POST',
 			'callback'            => __NAMESPACE__ . '\log_podcast_download',
-			'permission_callback' => '__return_true', // Optionally restrict access.
+			'permission_callback' => function () {
+				return current_user_can( 'manage_options' );
+			},
 		)
 	);
 }
