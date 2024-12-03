@@ -31,7 +31,7 @@
 !/wp-content/themes/olliechild
 /wp-content/plugins/*
 /wp-content/mu-plugins/*
-!/wp-content/plugins/bac-functionality/
+!/wp-content/plugins/bc-plugin-stats/
 
 
 # Log files
