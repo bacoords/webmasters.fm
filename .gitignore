@@ -25,13 +25,14 @@
 
 # Configuration
 /wp-config.php
+/wp-content/db.php
 
 # Themes and Plugins
 /wp-content/themes/*
 !/wp-content/themes/olliechild
 /wp-content/plugins/*
 /wp-content/mu-plugins/*
-!/wp-content/plugins/bc-plugin-stats/
+!/wp-content/plugins/wm-functionality/
 
 
 # Log files
