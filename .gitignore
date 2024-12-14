@@ -29,7 +29,7 @@
 
 # Themes and Plugins
 /wp-content/themes/*
-!/wp-content/themes/olliechild
+!/wp-content/themes/webmasters-ollie/
 /wp-content/plugins/*
 /wp-content/mu-plugins/*
 !/wp-content/plugins/wm-functionality/
