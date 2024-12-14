@@ -59,3 +59,67 @@ function enqueue_transcript_block_css() {
 	);
 }
 add_action( 'after_setup_theme', __NAMESPACE__ . '\enqueue_transcript_block_css' );
+
+
+
+/**
+ * Register the build/term-image block
+ */
+function register_term_image_block() {
+	register_block_type( WM_FUNCTIONALITY_PATH . 'build/term-image' );
+}
+add_action( 'init', __NAMESPACE__ . '\register_term_image_block' );
+
+
+
+/**
+ * Register the term image field in the REST API
+ */
+function add_term_image_to_api() {
+
+	register_rest_field(
+		'speaker',
+		'image',
+		array(
+			'get_callback' => function ( $term ) {
+
+				$image_id = get_term_meta( $term['id'], 'image', true );
+				if ( ! $image_id ) {
+					return array();
+				}
+
+				$image = wp_get_attachment_image_src( $image_id, 'full' );
+				if ( ! $image ) {
+					return array();
+				}
+
+				return array(
+					'id'  => $image_id,
+					'url' => $image[0],
+				);
+			},
+			'schema'       => array(
+				'description' => esc_html__( 'Image for the term.' ),
+				'type'        => 'object',
+				'context'     => array( 'view', 'edit' ),
+				'properties'  => array(
+					'id'  => array(
+						'description' => esc_html__( 'Image ID.' ),
+						'type'        => 'integer',
+						'context'     => array( 'view', 'edit' ),
+						'readonly'    => true,
+					),
+					'url' => array(
+						'description' => esc_html__( 'Image URL.' ),
+						'type'        => 'string',
+						'context'     => array( 'view', 'edit' ),
+						'format'      => 'uri',
+						'readonly'    => true,
+					),
+				),
+			),
+		)
+	);
+}
+add_filter( 'init', __NAMESPACE__ . '\add_term_image_to_api' );
+add_filter( 'rest_api_init', __NAMESPACE__ . '\add_term_image_to_api' );

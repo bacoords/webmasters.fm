@@ -1,0 +1,31 @@
+{
+  "name": "wm-functionality",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "scripts":{
+	"start": "wp-scripts start",
+	"build": "wp-scripts build",
+	"format:js": "wp-scripts format-js",
+	"lint:css": "wp-scripts lint-style",
+	"lint:js": "wp-scripts lint-js",
+	"lint:md": "wp-scripts lint-md",
+	"lint:php": "wp-scripts lint-php",
+	"lint:all": "npm-run-all lint:*",
+	"test:e2e": "wp-scripts test-e2e",
+	"test:unit": "wp-scripts test-unit",
+	"test:php": "wp-scripts test-php",
+	"test:all": "npm-run-all test:*",
+	"type-check": "wp-scripts type-check",
+	"type-check:watch": "wp-scripts type-check --watch",
+	"verify": "npm-run-all format:js lint:all type-check test:all",
+	"preversion": "npm run verify",
+	"version": "wp-scripts version",
+	"postversion": "git push && git push --tags"
+  },
+  "dependencies": {
+    "@wordpress/scripts": "^30.7.0"
+  }
+}
