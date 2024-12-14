@@ -61,7 +61,7 @@ export default function Edit({ context }) {
 					<img
 						src={imageUrl}
 						alt="Speaker"
-						style={{ width: "150px", height: "150px" }}
+						style={{ width: "50px", height: "50px" }}
 					/>
 				))
 			) : (
