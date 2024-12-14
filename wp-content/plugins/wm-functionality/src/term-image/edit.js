@@ -34,7 +34,7 @@ import "./editor.scss";
  */
 export default function Edit({ context }) {
 	const post_id = context.postId;
-	const [imageUrl, setImageUrl] = useState(null);
+	const [imageUrls, setImageUrls] = useState([]);
 
 	// Get the 'speaker' terms for the post.
 	const terms = useSelect(
@@ -46,22 +46,24 @@ export default function Edit({ context }) {
 		[post_id],
 	);
 
-	console.log(terms);
-
 	useEffect(() => {
 		// Get the first term from the terms list.
-		const term = terms && terms[0];
-		if (term) {
-			// Get the term meta for the 'speaker_image' key.
-			const imageUrl = term.image?.url;
-			setImageUrl(imageUrl);
+		if (terms && terms.length > 0) {
+			const urls = terms.map((term) => term.image?.url);
+			setImageUrls(urls);
 		}
 	}, [terms]);
 
 	return (
 		<div {...useBlockProps()}>
-			{imageUrl ? (
-				<img src={imageUrl} alt="Speaker" />
+			{imageUrls.length > 0 ? (
+				imageUrls.map((imageUrl) => (
+					<img
+						src={imageUrl}
+						alt="Speaker"
+						style={{ width: "150px", height: "150px" }}
+					/>
+				))
 			) : (
 				<Placeholder>
 					{__("No image or speaker.", "wm-functionality")}
