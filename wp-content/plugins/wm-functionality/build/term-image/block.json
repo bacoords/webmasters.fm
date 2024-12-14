@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wm-functionality/term-image",
+  "version": "0.1.0",
+  "title": "Term Image",
+  "category": "media",
+  "icon": "format-image",
+  "description": "Display an image for a term.",
+  "example": {},
+  "supports": {
+    "html": false,
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "dimensions": {
+      "width": true,
+      "height": true
+    },
+    "shadow": true
+  },
+  "usesContext": [
+    "postId",
+    "postType",
+    "queryId"
+  ],
+  "textdomain": "term-image",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}
