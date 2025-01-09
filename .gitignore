@@ -33,6 +33,7 @@
 /wp-content/plugins/*
 /wp-content/mu-plugins/*
 !/wp-content/plugins/wm-functionality/
+!/wp-content/plugins/wm-simple-stats-api/
 
 
 # Log files
