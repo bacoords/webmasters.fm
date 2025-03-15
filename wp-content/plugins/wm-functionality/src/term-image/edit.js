@@ -58,11 +58,13 @@ export default function Edit({ context }) {
 		<div {...useBlockProps()}>
 			{imageUrls.length > 0 ? (
 				imageUrls.map((imageUrl) => (
-					<img
-						src={imageUrl}
-						alt="Speaker"
-						style={{ width: "50px", height: "50px" }}
-					/>
+					<a href={imageUrl} target="_blank" rel="noopener noreferrer">
+						<img
+							src={imageUrl}
+							alt="Speaker"
+							style={{ width: "50px", height: "50px" }}
+						/>
+					</a>
 				))
 			) : (
 				<Placeholder>
