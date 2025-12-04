@@ -38,8 +38,9 @@ if ( is_tax( 'speaker' ) ) {
 		if ( ! $image ) {
 			continue;
 		}
+			// todo - make a setting to do an unlinked version
 		?>
-		<a href="<?php echo esc_url( get_term_link( $speaker ) ); ?>">
+		<a href="<?php echo esc_url( get_term_link( $speaker ) ); ?>" aria-label="<?php wp_sprintf( '%s %s', __( 'All episodes with:', 'wm-functionality' ), $speaker->name ); ?>">
 			<?php echo wp_get_attachment_image( $image, 'thumbnail' ); ?>
 		</a>
 	<?php endforeach; ?>
