@@ -39,13 +39,16 @@ if ( is_tax( 'speaker' ) ) {
 			continue;
 		}
 		if ( ! is_tax( 'speaker' ) ) {
-		?>
-		<a href="<?php echo esc_url( get_term_link( $speaker ) ); ?>" aria-label="<?php echo wp_sprintf( '%s %s', __( 'All episodes with:', 'wm-functionality' ), $speaker->name ); ?>">
-			<?php echo wp_get_attachment_image( $image, 'thumbnail' ); ?>
-		</a>		
-		<?php 
+			// translators: %s is the speaker name.
+			$aria_label = wp_sprintf( __( 'All episodes with: %s', 'wm-functionality' ), $speaker->name );
+			?>
+			<a href="<?php echo esc_url( get_term_link( $speaker ) ); ?>" aria-label="<?php echo esc_attr( $aria_label ); ?>">
+				<?php echo wp_get_attachment_image( $image, 'thumbnail' ); ?>
+			</a>
+			<?php
 		} else {
 			echo wp_get_attachment_image( $image, 'thumbnail' );
 		}
-endforeach; ?>
+endforeach;
+	?>
 </div>
