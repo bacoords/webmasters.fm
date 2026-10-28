@@ -1,32 +1,21 @@
-.wp-block-wm-functionality-term-image img {
-	width: 100%;
-	height: auto;
-	max-width: 50px;
-	border-radius: 100%;
-}
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
 
-.wp-block-wm-functionality-term-image a {
-	text-decoration: none;
-}
-
-.wp-block-wm-functionality-term-image a + a {
-	margin-left: -20px;
-}
-
-.wp-block-wm-functionality-term-image.is-display-text {
-	display: flex;
-	flex-wrap: wrap;
-	column-gap: 0.65em;
-	row-gap: 0.15em;
-	font-size: var(--wp--preset--font-size--small);
-}
-
-.wp-block-wm-functionality-term-image.is-display-text a {
-	color: inherit;
-	text-decoration: underline;
-	text-underline-offset: 0.15em;
-}
-
-.wp-block-wm-functionality-term-image.is-display-text a + a {
-	margin-left: 0;
+.wp-block-wm-functionality-term-image {
+	img {
+		width: 100%;
+		height: auto;
+		max-width: 50px;
+		border-radius: 100%;
+	}
+	a {
+		& + a {
+			margin-left: -20px;
+		}
+		text-decoration: none;
+	}
 }

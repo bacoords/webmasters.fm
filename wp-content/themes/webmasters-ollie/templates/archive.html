@@ -11,19 +11,15 @@
 <!-- wp:group {"tagName":"main","style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"},"hideFromFeed":true} -->
 <main class="wp-block-group" style="margin-top:0;margin-bottom:0"><!-- wp:query {"queryId":1,"query":{"perPage":10,"pages":"0","offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"exclude","inherit":true},"align":"full"} -->
 <div class="wp-block-query alignfull"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|xx-large","bottom":"var:preset|spacing|xx-large"}}},"backgroundColor":"tertiary","layout":{"type":"constrained"},"hideFromFeed":true} -->
-<div class="wp-block-group alignwide has-tertiary-background-color has-background" style="padding-top:var(--wp--preset--spacing--xx-large);padding-bottom:var(--wp--preset--spacing--xx-large)"><!-- wp:post-template {"align":"wide","className":"wm-episode-grid wm-episode-grid--archive","layout":{"type":"grid","columnCount":2}} -->
-<!-- wp:group {"className":"wm-episode-card","layout":{"type":"constrained"},"hideFromFeed":true} -->
-<div class="wp-block-group wm-episode-card"><!-- wp:group {"className":"wm-episode-media","layout":{"type":"constrained"},"hideFromFeed":true} -->
-<div class="wp-block-group wm-episode-media"><!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9","className":"wm-episode-thumbnail"} /--></div>
-<!-- /wp:group -->
+<div class="wp-block-group alignwide has-tertiary-background-color has-background" style="padding-top:var(--wp--preset--spacing--xx-large);padding-bottom:var(--wp--preset--spacing--xx-large)"><!-- wp:post-template {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|medium"}},"layout":{"type":"grid","minimumColumnWidth":"500px"}} -->
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|small","right":"var:preset|spacing|small","bottom":"var:preset|spacing|small","left":"var:preset|spacing|small"},"blockGap":"var:preset|spacing|small"}},"backgroundColor":"base","layout":{"type":"constrained"},"hideFromFeed":true} -->
+<div class="wp-block-group has-base-background-color has-background" style="padding-top:var(--wp--preset--spacing--small);padding-right:var(--wp--preset--spacing--small);padding-bottom:var(--wp--preset--spacing--small);padding-left:var(--wp--preset--spacing--small)"><!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9"} /-->
 
-<!-- wp:post-date {"className":"wm-episode-date","textColor":"secondary"} /-->
+<!-- wp:post-date {"textColor":"secondary","fontSize":"x-small"} /-->
 
-<!-- wp:post-title {"level":2,"isLink":true,"className":"wm-episode-title"} /-->
+<!-- wp:post-title {"level":2,"isLink":true,"fontSize":"base"} /-->
 
-<!-- wp:wm-functionality/term-image {"display":"text","className":"wm-episode-guests"} /-->
-
-<!-- wp:post-excerpt {"moreText":"Play Episode →","className":"wm-episode-excerpt"} /--></div>
+<!-- wp:wm-functionality/term-image {"display":"text"} /--></div>
 <!-- /wp:group -->
 <!-- /wp:post-template -->
 

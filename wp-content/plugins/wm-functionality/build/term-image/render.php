@@ -42,18 +42,25 @@ if ( 'text' === $display ) {
 }
 ?>
 <div <?php echo get_block_wrapper_attributes( array( 'class' => 'is-display-' . $display ) ); ?>>
-	<?php foreach ( $speakers as $speaker ) : ?>
+	<?php
+	$first_speaker = true;
+	foreach ( $speakers as $speaker ) :
+		?>
 		<?php
 		if ( 'text' === $display ) {
+			if ( ! $first_speaker ) {
+				echo ', ';
+			}
+			$first_speaker = false;
 			$link = get_term_link( $speaker );
 			if ( ! is_wp_error( $link ) ) {
 				printf(
-					'<a href="%1$s">%2$s</a>',
+					'<span><a href="%1$s">%2$s</a></span>',
 					esc_url( $link ),
 					esc_html( $speaker->name )
 				);
 			} else {
-				echo esc_html( $speaker->name );
+				printf( '<span>%s</span>', esc_html( $speaker->name ) );
 			}
 			continue;
 		}

@@ -23,14 +23,16 @@ export default function Edit( { attributes, setAttributes, context } ) {
 			: terms;
 	let preview;
 	if ( display === 'text' ) {
-		preview = shownTerms?.map( ( term ) => (
-			<a
-				href={ term.link }
-				key={ term.id }
-				onClick={ ( event ) => event.preventDefault() }
-			>
-				{ term.name }
-			</a>
+		preview = shownTerms?.map( ( term, index ) => (
+			<span key={ term.id }>
+				{ index > 0 ? ', ' : null }
+				<a
+					href={ term.link }
+					onClick={ ( event ) => event.preventDefault() }
+				>
+					{ term.name }
+				</a>
+			</span>
 		) );
 	} else {
 		preview = shownTerms
