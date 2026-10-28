@@ -28,14 +28,23 @@ if ( is_tax( 'speaker' ) ) {
 		}
 	);
 }
+
+if ( 'text' === $display ) {
+	$speakers = array_filter(
+		$speakers,
+		static function ( $speaker ) use ( $bc_term_id ) {
+			return $speaker->term_id !== $bc_term_id;
+		}
+	);
+	if ( ! $speakers ) {
+		return;
+	}
+}
 ?>
 <div <?php echo get_block_wrapper_attributes( array( 'class' => 'is-display-' . $display ) ); ?>>
 	<?php foreach ( $speakers as $speaker ) : ?>
 		<?php
 		if ( 'text' === $display ) {
-			if ( $speaker->term_id === $bc_term_id ) {
-				continue;
-			}
 			$link = get_term_link( $speaker );
 			if ( ! is_wp_error( $link ) ) {
 				printf(
