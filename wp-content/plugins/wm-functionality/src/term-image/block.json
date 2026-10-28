@@ -3,11 +3,17 @@
 	"apiVersion": 3,
 	"name": "wm-functionality/term-image",
 	"version": "0.1.0",
-	"title": "Term Image",
+	"title": "Guest Image or Name",
 	"category": "media",
 	"icon": "format-image",
-	"description": "Display an image for a term.",
+	"description": "Display guest portraits or linked guest names.",
 	"example": {},
+	"attributes": {
+		"display": {
+			"type": "string",
+			"default": "image"
+		}
+	},
 	"supports": {
 		"html": false,
 		"spacing": {

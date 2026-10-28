@@ -4,7 +4,9 @@
  */
 
 // Get the postID from the context.
-$this_post_id = $block->context['postId'];
+$this_post_id = $block->context['postId'] ?? 0;
+$display      = isset( $attributes['display'] ) && 'text' === $attributes['display'] ? 'text' : 'image';
+$bc_term_id   = 14;
 
 if ( is_tax( 'speaker' ) ) {
 	$speakers   = array();
@@ -14,10 +16,8 @@ if ( is_tax( 'speaker' ) ) {
 	// Get the speakers terms for the post.
 	$speakers = get_the_terms( $this_post_id, 'speaker' );
 
-	$bc_term_id = 14;
-
 	// If there are no speakers, return early.
-	if ( ! $speakers ) {
+	if ( ! $speakers || is_wp_error( $speakers ) ) {
 		return;
 	}
 
@@ -29,9 +29,25 @@ if ( is_tax( 'speaker' ) ) {
 	);
 }
 ?>
-<div <?php echo get_block_wrapper_attributes(); ?>>
+<div <?php echo get_block_wrapper_attributes( array( 'class' => 'is-display-' . $display ) ); ?>>
 	<?php foreach ( $speakers as $speaker ) : ?>
 		<?php
+		if ( 'text' === $display ) {
+			if ( $speaker->term_id === $bc_term_id ) {
+				continue;
+			}
+			$link = get_term_link( $speaker );
+			if ( ! is_wp_error( $link ) ) {
+				printf(
+					'<a href="%1$s">%2$s</a>',
+					esc_url( $link ),
+					esc_html( $speaker->name )
+				);
+			} else {
+				echo esc_html( $speaker->name );
+			}
+			continue;
+		}
 
 		// Get the speaker image.
 		$image = get_term_meta( $speaker->term_id, 'image', true );

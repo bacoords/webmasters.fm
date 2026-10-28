@@ -1,76 +1,79 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-import { __ } from "@wordpress/i18n";
+import { __ } from '@wordpress/i18n';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
+import { PanelBody, Placeholder, SelectControl } from '@wordpress/components';
+import './editor.scss';
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from "@wordpress/block-editor";
-import { useSelect } from "@wordpress/data";
-import { useState, useEffect } from "@wordpress/element";
-import { Placeholder } from "@wordpress/components";
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import "./editor.scss";
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {Element} Element to render.
- */
-export default function Edit({ context }) {
-	const post_id = context.postId;
-	const [imageUrls, setImageUrls] = useState([]);
-
-	// Get the 'speaker' terms for the post.
+export default function Edit( { attributes, setAttributes, context } ) {
+	const { display = 'image' } = attributes;
+	const postId = context.postId;
 	const terms = useSelect(
-		(select) =>
-			select("core").getEntityRecords("taxonomy", "speaker", {
-				per_page: -1,
-				post: post_id,
-			}),
-		[post_id],
+		( select ) =>
+			postId
+				? select( 'core' ).getEntityRecords( 'taxonomy', 'speaker', {
+						per_page: -1,
+						post: postId,
+				  } )
+				: null,
+		[ postId ]
 	);
-
-	useEffect(() => {
-		// Get the first term from the terms list.
-		if (terms && terms.length > 0) {
-			const urls = terms.map((term) => term.image?.url);
-			setImageUrls(urls);
-		}
-	}, [terms]);
+	const shownTerms =
+		display === 'text'
+			? terms?.filter( ( term ) => term.id !== 14 )
+			: terms;
+	let preview;
+	if ( display === 'text' ) {
+		preview = shownTerms?.map( ( term ) => (
+			<a
+				href={ term.link }
+				key={ term.id }
+				onClick={ ( event ) => event.preventDefault() }
+			>
+				{ term.name }
+			</a>
+		) );
+	} else {
+		preview = shownTerms
+			?.filter( ( term ) => term.image?.url )
+			.map( ( term ) => (
+				<img src={ term.image.url } alt={ term.name } key={ term.id } />
+			) );
+	}
 
 	return (
-		<div {...useBlockProps()}>
-			{imageUrls.length > 0 ? (
-				imageUrls.map((imageUrl) => (
-					<a href={imageUrl} target="_blank" rel="noopener noreferrer">
-						<img
-							src={imageUrl}
-							alt="Speaker"
-							style={{ width: "50px", height: "50px" }}
-						/>
-					</a>
-				))
-			) : (
-				<Placeholder>
-					{__("No image or speaker.", "wm-functionality")}
-				</Placeholder>
-			)}
-		</div>
+		<>
+			<InspectorControls>
+				<PanelBody title={ __( 'Guest display', 'wm-functionality' ) }>
+					<SelectControl
+						label={ __( 'Show guests as', 'wm-functionality' ) }
+						value={ display }
+						options={ [
+							{
+								label: __( 'Images', 'wm-functionality' ),
+								value: 'image',
+							},
+							{
+								label: __( 'Guest names', 'wm-functionality' ),
+								value: 'text',
+							},
+						] }
+						onChange={ ( value ) =>
+							setAttributes( { display: value } )
+						}
+					/>
+				</PanelBody>
+			</InspectorControls>
+			<div
+				{ ...useBlockProps( { className: `is-display-${ display }` } ) }
+			>
+				{ preview?.length ? (
+					preview
+				) : (
+					<Placeholder>
+						{ __( 'No guests assigned.', 'wm-functionality' ) }
+					</Placeholder>
+				) }
+			</div>
+		</>
 	);
 }
